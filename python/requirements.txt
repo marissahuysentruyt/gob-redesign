@@ -1,0 +1,28 @@
+# Web scraping dependencies
+requests==2.31.0
+beautifulsoup4==4.12.2
+lxml==4.9.3
+
+# Supabase client
+supabase==2.3.4
+
+# Environment variable management
+python-dotenv==1.0.0
+
+# Data processing
+unicodedata2==15.1.0
+
+# JSON handling (built-in, but listing for completeness)
+# json - built-in module
+
+# Date/time handling (built-in, but listing for completeness)
+# datetime - built-in module
+
+# Regular expressions (built-in, but listing for completeness)
+# re - built-in module
+
+# XML parsing (built-in, but listing for completeness)
+# xml.etree.ElementTree - built-in module
+
+# Operating system interface (built-in, but listing for completeness)
+# os - built-in module

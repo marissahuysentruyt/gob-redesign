@@ -1,6 +1,6 @@
-# GOB project
+# GOB Redesign Project
 
-This side project redesigns the GOB website and improves its user experience. It also includes new features and functionalities to enhance the overall user experience to bring the site modern features and patterns. It uses the Semrush Intergalactic design system.
+This side project redesigns the GOB website with modern features and improved user experience. Built with Nuxt.js and the Semrush Intergalactic design system.
 
 ## Features
 
@@ -17,77 +17,144 @@ This side project redesigns the GOB website and improves its user experience. It
 - Nuxt.js
 - TypeScript
 - Supabase
+- Python
 
-## Nuxt Minimal Starter
+## Quick Nuxt Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-### Setup
-
-Make sure to install dependencies:
+### 1. Clone and Install Dependencies
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
+git clone <repository-url>
+cd gob-redesign
 bun install
 ```
 
-### Development Server
+### 2. Environment Setup
 
-Start the development server on `http://localhost:3000`:
+Copy the environment template:
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with your actual credentials:
+```env
+# Supabase Configuration
+SUPABASE_URL=https://your-project-ref.supabase.co
+SUPABASE_KEY=your-anon-key-here
+
+# Application Configuration
+NODE_ENV=development
+```
+
+### 3. Python Setup (for data scraping)
 
 ```bash
-# npm
-npm run dev
+cd python
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+deactivate  # To exit virtual environment
+```
 
-# pnpm
-pnpm dev
+### 4. Development Server
 
-# yarn
-yarn dev
-
-# bun
+```bash
 bun run dev
 ```
 
-### Production
+Visit `http://localhost:3000` to see your application.
 
-Build the application for production:
+## Available Scripts
 
+### Frontend Development
 ```bash
-# npm
-npm run build
+bun run dev          # Start development server
+bun run build        # Build for production
+bun run generate     # Generate static site
+bun run preview      # Preview production build
+```
 
-# pnpm
-pnpm build
+### Data Management
+```bash
+# Activate Python environment and run scraper
+cd python
+source venv/bin/activate
+python main.py       # Scrape and populate database
+deactivate
+```
 
-# yarn
-yarn build
+## Project Structure
 
-# bun
+```
+gob-redesign/
+├── pages/           # Nuxt.js pages and routes
+├── composables/     # Vue composables (including useSupabase)
+├── public/          # Static assets
+├── python/          # Web scraping scripts
+│   ├── main.py      # Main scraping script
+│   └── requirements.txt
+├── .env.example     # Environment template
+└── nuxt.config.ts   # Nuxt configuration
+```
+
+## Data Pipeline
+
+1. **Scraping**: Python script extracts game data from GOB Retail website
+2. **Storage**: Data is stored in Supabase database with JSON backups
+3. **Display**: Nuxt.js frontend displays inventory via the Inventory page
+
+## Security Features
+
+- Environment variables for sensitive credentials
+- Git-ignored `.env` files and data backups
+- Supabase Row Level Security (RLS)
+- Input validation and sanitization
+
+## Troubleshooting
+
+### Common Issues
+
+**Missing environment variables**
+- Ensure `.env` file exists and contains all required variables
+- Restart development server after changes
+
+**Python import errors**
+- Activate virtual environment: `source venv/bin/activate`
+- Install dependencies: `pip install -r requirements.txt`
+
+**Supabase connection errors**
+- Verify URL and key in `.env` file
+- Check Supabase project status and network connectivity
+
+## Deployment
+
+### Production Build
+```bash
 bun run build
 ```
 
-Locally preview production build:
+### Environment Variables
+Set the following in your hosting platform:
+- `SUPABASE_URL`
+- `SUPABASE_KEY` 
+- `NODE_ENV=production`
 
-```bash
-# npm
-npm run preview
+## Contributing
 
-# pnpm
-pnpm preview
+1. Fork the repository
+2. Create a feature branch
+3. Copy `.env.example` to `.env` and configure
+4. Make your changes
+5. Test thoroughly
+6. Submit a pull request
 
-# yarn
-yarn preview
+## Documentation/Sources
 
-# bun
-bun run preview
-```
+- [Nuxt.js Documentation](https://nuxt.com/docs)
+- [Supabase Documentation](https://supabase.com/docs)
+- [Semrush Intergalactic Design System](https://intergalactic.semrush.com/)
+
+## License
+
+This project is for educational and portfolio purposes.
