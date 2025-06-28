@@ -88,14 +88,69 @@ deactivate
 
 ```
 gob-redesign/
-├── pages/           # Nuxt.js pages and routes
-├── composables/     # Vue composables (including useSupabase)
-├── public/          # Static assets
-├── python/          # Web scraping scripts
-│   ├── main.py      # Main scraping script
-│   └── requirements.txt
-├── .env.example     # Environment template
-└── nuxt.config.ts   # Nuxt configuration
+├── app.vue                    # Root application component
+├── components/                # Vue components (auto-imported)
+│   ├── atoms/                 # Small, reusable UI elements
+│   │   ├── button.vue        # Custom button component
+│   │   ├── heading.vue        # Dynamic heading component (h1-h6)
+│   │   └── link.vue           # Custom link wrapper for NuxtLink
+│   ├── globals/               # Global layout components
+│   │   ├── banner.vue         # Site banner with contact and account info
+│   │   ├── footer.vue         # Site footer with more resources
+│   │   ├── header.vue         # Site header with navigation
+│   │   └── navigation.vue     # Main navigation menu
+├── composables/               # Vue composables (auto-imported)
+│   └── useSupabase.ts         # Supabase client with helper methods
+├── layouts/                   # Page layouts
+│   └── default.vue            # Default page layout wrapper
+├── pages/                     # File-based routing
+│   ├── index.vue              # Homepage (/)
+│   ├── about.vue              # About page (/about)
+│   └── inventory.vue          # Inventory page (/inventory)
+├── public/                    # Static assets
+│   └── gob-logo.png           # Site logo
+├── types/                     # TypeScript type definitions (auto-imported)
+│   └── index.ts               # Component props and domain types
+├── python/                    # Web scraping scripts
+│   ├── main.py                # Main scraping script
+│   └── requirements.txt       # Python dependencies
+├── .env.example               # Environment template
+└── nuxt.config.ts             # Nuxt configuration
+```
+
+## Component Organization
+
+This project loosely follows atomic design principles for component organization:
+
+### **Atoms** (`/components/atoms/`)
+Small, reusable UI elements that can't be broken down further:
+- `heading.vue` - Dynamic heading component that renders h1-h6 based on props
+- `link.vue` - Custom link wrapper with active state and styling
+
+### **Globals** (`/components/globals/`)
+Layout components that appear across multiple pages:
+- `header.vue` - Site header with logo and navigation
+- `navigation.vue` - Main navigation menu
+
+### **Component Naming Convention**
+- Prefix components with their domain: `GlobalsHeader`, `AtomsHeading`
+
+### **TypeScript Integration**
+All components use TypeScript with shared type definitions found in `/types/index.ts`.
+
+#### Example
+```typescript
+// types/index.ts
+export interface HeadingProps {
+  level?: "1" | "2" | "3" | "4" | "5" | "6"
+  title?: string
+}
+
+// Component usage
+const props = withDefaults(defineProps<HeadingProps>(), {
+  level: "1",
+  title: "Default Title"
+})
 ```
 
 ## Data Pipeline
