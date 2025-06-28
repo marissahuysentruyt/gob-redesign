@@ -1,5 +1,10 @@
 <template>
   <div class="layout">
-    <slot />
+    <GlobalsBanner />
+    <GlobalsHeader />
+    <main>
+      <NuxtPage />
+    </main>
+    <GlobalsFooter />
   </div>
 </template>
