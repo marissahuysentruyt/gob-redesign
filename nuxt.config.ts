@@ -11,6 +11,11 @@ export default defineNuxtConfig({
     supabaseUrl: process.env.SUPABASE_URL,
     supabaseKey: process.env.SUPABASE_KEY,
 
+    // Private keys for Figma access
+    mcpServers: {
+      figmaApiKey: process.env.FIGMA_API_KEY,
+    },
+
     // Public keys (exposed to client-side)
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
