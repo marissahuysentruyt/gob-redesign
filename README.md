@@ -22,6 +22,7 @@ This side project redesigns the GOB website with modern features and improved us
 ## Quick Nuxt Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+
 ### 1. Clone and Install Dependencies
 
 ```bash
@@ -33,11 +34,13 @@ bun install
 ### 2. Environment Setup
 
 Copy the environment template:
+
 ```bash
 cp .env.example .env
 ```
 
 Edit `.env` with your actual credentials:
+
 ```env
 # Supabase Configuration
 SUPABASE_URL=https://your-project-ref.supabase.co
@@ -45,6 +48,10 @@ SUPABASE_KEY=your-anon-key-here
 
 # Application Configuration
 NODE_ENV=development
+
+# Figma MCP
+FIGMA_API_KEY=
+
 ```
 
 ### 3. Python Setup (for data scraping)
@@ -68,6 +75,7 @@ Visit `http://localhost:3000` to see your application.
 ## Available Scripts
 
 ### Frontend Development
+
 ```bash
 bun run dev          # Start development server
 bun run build        # Build for production
@@ -76,6 +84,7 @@ bun run preview      # Preview production build
 ```
 
 ### Data Management
+
 ```bash
 # Activate Python environment and run scraper
 cd python
@@ -153,6 +162,19 @@ const props = withDefaults(defineProps<HeadingProps>(), {
 })
 ```
 
+## UI Components
+
+- Follow the [Semrush Intergalactic Design System](https://intergalactic.semrush.com/) for all UI work.
+- Place atomic components in `components/atoms/`, molecules in `components/molecules/`, etc.
+- Reference the Figma file for design specs.
+
+## Figma & MCP Integration
+
+- The project uses an MCP server for Figma integration.
+- Set your Figma API key in `.env` as `FIGMA_API_KEY`.
+- Project-level Figma config is in `mcp.json` (do not put secrets here).
+<!-- TODO: add more about what you can do with the MCP server and why it's handy  -->
+
 ## Data Pipeline
 
 1. **Scraping**: Python script extracts game data from GOB Retail website
@@ -171,28 +193,34 @@ const props = withDefaults(defineProps<HeadingProps>(), {
 ### Common Issues
 
 **Missing environment variables**
+
 - Ensure `.env` file exists and contains all required variables
 - Restart development server after changes
 
 **Python import errors**
+
 - Activate virtual environment: `source venv/bin/activate`
 - Install dependencies: `pip install -r requirements.txt`
 
 **Supabase connection errors**
+
 - Verify URL and key in `.env` file
 - Check Supabase project status and network connectivity
 
 ## Deployment
 
 ### Production Build
+
 ```bash
 bun run build
 ```
 
 ### Environment Variables
+
 Set the following in your hosting platform:
+
 - `SUPABASE_URL`
-- `SUPABASE_KEY` 
+- `SUPABASE_KEY`
 - `NODE_ENV=production`
 
 ## Contributing
